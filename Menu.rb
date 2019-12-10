@@ -20,7 +20,7 @@ class Menu
         )
 
 
-    ## Check Types are correct
+    ## We check Types are correct
     raise TypeError.new('Argument "functions" must be a Hash.') if !(functions.is_a? Hash)
     #raise ArgumentError.new('Argument "functions" cannot be empty.') if functions.size == 0
     functions.each_with_index do |(k, v), i|
