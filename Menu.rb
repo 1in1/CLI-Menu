@@ -6,6 +6,7 @@ TEXT_UNMATCHED = 'Unmatched " or ' + "'"
 TEXT_TOO_FEW_ARGS = 'Not enough arguments to option '
 TEXT_TOO_MANY_ARGS = 'Too many arguments to option '
 TEXT_ARG_NOT_KNOWN = 'Arguments not recognised. '
+TEXT_ABORT = 'Exiting.'
 
 class Menu
   def initialize(functions, #Hash object. Key = trigger string, Value = [ Procudure to run, min # of args, max # of args ]
@@ -14,54 +15,49 @@ class Menu
             #Everything in description will be captured as an option if possible
             #Functions should have value[0] = -1, and value[1] = nil
       banner,
-      indent = '>',
+      indent = '> ',
       options_on_unrecognised = false
         )
-    begin
-      ## Check Types are correct
-      raise TypeError.new('Argument "functions" must be a Hash.') if !(functions.is_a? Hash)
-      raise ArgumentError.new('Argument "functions" cannot be empty.') if functions.size == 0
-      functions.each_with_index do |(k, v), i|
-        raise TypeError.new('Argument "functions" at index ' + i.to_s + ': key must be a non-empty String.') if (!(k.is_a?(String) && k.strip == k) || k.empty?)
-        raise TypeError.new('Argument "functions" at index ' + i.to_s + ': value must be an Array.') if !(v.is_a? Array)
-        raise ArgumentError.new('Argument "functions" at index ' + i.to_s + ': value is of the wrong format') if !(v.size == 3)
-        raise TypeError.new('Argument "functions" at index ' + i.to_s + ': value[0] must be a Proc.') if !(v[0].is_a? Proc)
-        raise TypeError.new('Argument "functions" at index ' + i.to_s + ': value[1] must be an Integer.') if !(v[1].is_a? Integer)
-        raise TypeError.new('Argument "functions" at index ' + i.to_s + ': value[2] must be an Integer.') if !(v[2].is_a? Integer)
-        raise ArgumentError.new('Argument "functions" at index ' + i.to_s + ': max/min args are invalid.') if !(0 <= v[1] && (v[1] <= v[2] || v[2] < 0))
-      end
-      raise TypeError.new('Argument "descriptions" must be hash.') if !(descriptions.is_a? Hash)
-      raise ArgumentError.new('Argument "descriptions" cannot be empty.') if descriptions.size == 0
-      descriptions.each_with_index do |(k, v), i|
-        raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': key must be a non-empty String.') if (!(k.is_a?(String) && k.strip == k) || k.empty?)
-        raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': value must be an Array.') if !(v.is_a? Array)
-        raise ArgumentError.new('Argument "descriptions" at index ' + i.to_s + ': value is of the wrong format.') if (v.size != 2)
-        raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': value[0] must be a String.') if !(v[0].is_a? String)
-        raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': value[1] must be an Array.') if !(v[1].is_a? Array)
-        v[1].each do |a|
-          if !(a.is_a?(String) && a.strip == a) || a.empty?
-            raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': aliases must be non-empty Strings.') end
-        end
-      end
-      raise TypeError.new('Argument "banner" must be a String.') if !(banner.is_a? String)
-      raise TypeError.new('Argument "indent" must be a String.') if !(indent.is_a? String)
-      if !(options_on_unrecognised == false || options_on_unrecognised == true)
-        raise TypeError.new('Argument "options_on_unrecognised" must be a TrueClass or FalseClass.') end
 
 
-      @funct = functions
-      @desc = descriptions
-      @indent = indent
-      @opts_on_fail = options_on_unrecognised
-
-      print banner
-      print "\n"
-
-    rescue TypeError => e
-      abort(e)
-    rescue ArgumentError => e
-      abort(e)
+    ## Check Types are correct
+    raise TypeError.new('Argument "functions" must be a Hash.') if !(functions.is_a? Hash)
+    #raise ArgumentError.new('Argument "functions" cannot be empty.') if functions.size == 0
+    functions.each_with_index do |(k, v), i|
+      raise TypeError.new('Argument "functions" at index ' + i.to_s + ': key must be a non-empty String.') if (!(k.is_a?(String) && k.strip == k) || k.empty?)
+      raise TypeError.new('Argument "functions" at index ' + i.to_s + ': value must be an Array.') if !(v.is_a? Array)
+      raise ArgumentError.new('Argument "functions" at index ' + i.to_s + ': value is of the wrong format') if !(v.size == 3)
+      raise TypeError.new('Argument "functions" at index ' + i.to_s + ': value[0] must be a Proc.') if !(v[0].is_a? Proc)
+      raise TypeError.new('Argument "functions" at index ' + i.to_s + ': value[1] must be an Integer.') if !(v[1].is_a? Integer)
+      raise TypeError.new('Argument "functions" at index ' + i.to_s + ': value[2] must be an Integer.') if !(v[2].is_a? Integer)
+      raise ArgumentError.new('Argument "functions" at index ' + i.to_s + ': max/min args are invalid.') if !(0 <= v[1] && (v[1] <= v[2] || v[2] < 0))
     end
+    raise TypeError.new('Argument "descriptions" must be hash.') if !(descriptions.is_a? Hash)
+    #raise ArgumentError.new('Argument "descriptions" cannot be empty.') if descriptions.size == 0
+    descriptions.each_with_index do |(k, v), i|
+      raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': key must be a non-empty String.') if (!(k.is_a?(String) && k.strip == k) || k.empty?)
+      raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': value must be an Array.') if !(v.is_a? Array)
+      raise ArgumentError.new('Argument "descriptions" at index ' + i.to_s + ': value is of the wrong format.') if (v.size != 2)
+      raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': value[0] must be a String.') if !(v[0].is_a? String)
+      raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': value[1] must be an Array.') if !(v[1].is_a? Array)
+      v[1].each do |a|
+        if !(a.is_a?(String) && a.strip == a) || a.empty?
+          raise TypeError.new('Argument "descriptions" at index ' + i.to_s + ': aliases must be non-empty Strings.') end
+      end
+    end
+    raise TypeError.new('Argument "banner" must be a String.') if !(banner.is_a? String)
+    raise TypeError.new('Argument "indent" must be a String.') if !(indent.is_a? String)
+    if !(options_on_unrecognised == false || options_on_unrecognised == true)
+      raise TypeError.new('Argument "options_on_unrecognised" must be a TrueClass or FalseClass.') end
+
+    @funct, @desc, @indent, @opts_on_fail = functions, descriptions, indent, options_on_unrecognised
+  end
+
+
+  attr_accessor :indent #Maybe add type controls on indent...
+
+  def print_banner
+    print @banner
   end
 
   def print_options
@@ -72,16 +68,18 @@ class Menu
     puts TEXT_QUIT
   end
 
+
   def idle
     loop do
       begin
         print @indent
         input = gets.chomp.lstrip
+        break if input.strip == 'q' || input.strip == 'Q'
         found = false
         @funct.each do |k, v|
           if input.index(Regexp.new(k + '\b')) == 0
             found = true
-            argv = process(k, input) #the Proc is provided with a Hash of the possible options
+            argv = process(k, input)  #The Proc is provided with an Array of arguments
             if argv.size < v[1]
               raise ArgumentError.new(TEXT_TOO_FEW_ARGS + k)
             elsif v[2] >= 0 && argv.size > v[2]
@@ -170,20 +168,10 @@ private
           end
           break
         end
-
-
-      end
-    end
+      end #end for
+    end   #end while
 
     return argv
   end
 
 end
-
-
-###TESTING
-d = {"p"=>["desc", ["print", "puts"]]}
-o = Proc.new do |a| puts a.join("BOOM") end
-f = {"p" => [o, 1, 3]}
-m = Menu.new(f, d, "banner text", "~~~>", true)
-m.idle
