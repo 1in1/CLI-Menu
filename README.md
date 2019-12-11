@@ -25,7 +25,7 @@ To make it do anything interesting, you'll need to populate those first two hash
 ```
 I'll break these down below
 
-###functions
+### functions
 This parameter accepts a Hash; let's use `f` in this example. **If you have a function that you want the user to be able to call from the menu, this is where it goes.** Choose a string, say `runme`, that will act as the primary way to call this. If you want to add aliases, pass them in the `descriptions` argument. Each function needs an entry in `f`.
 
 `runme` will be the key for this entry in the hash. We set `f[runme]` to an Array of length 3. This must be of the form `[ myproc, min_args, max_args]`, where
@@ -37,7 +37,7 @@ This parameter accepts a Hash; let's use `f` in this example. **If you have a fu
 
 Note if `f` is empty, all the user will be able to do is exit.
 
-###descriptions
+### descriptions
 This paramter accepts a Hash; let's use `d` in this example. **Everything the user needs to know to use your menu needs to go here.** There are two obvious use cases for this, so I'll describe both.
 
 1. You have some command that does something when typed from your menu (here, `runme`). You've defined it in `f`. You want it to be listed as a possible option by the menu.
@@ -49,7 +49,7 @@ The value associated with any key in `d` must be of the form `[ desc, aliases ]`
 ...`desc` is a String describing what the option does. This is displayed by `Menu.print_options`.
 ...`aliases` is an Array of Strings giving alternative triggers/names. **If you want to add aliases to a function, add them here: the menu will pick up these too.**
 
-###banner, indent, options_on_unrecognised
+### banner, indent, options_on_unrecognised
 banner is a String which is printed by Menu.print_banner. indent is a String which is printed to the console when prompting for user input (ie on the same line the user types). options_on_unrecognised is a boolean: if set to true, then every time the user gives an unknown option, Menu.print_options is called.
 
 
