@@ -3,7 +3,7 @@
 
 This is intended to be a safe menu class for building CLI projects. It handles presenting options to the user, retrieving input, parsing it into arguments, and calling the appropriate procedure for the given command.
 
-It will throw a LOT of errors if the input is formatted wrongly - with any luck this'll stop any errors once the menu is initialized. The hope behind this is that you are likely to build static menus, so will only see these errors during development, and then never see them at runtime.
+It will throw a LOT of errors if initialized wrongly - with any luck this'll stop any errors once the menu is initialized. The hope behind this is that you are likely to build static menus, so will only see these errors during development, and then never see them at runtime.
 
 
 ***
