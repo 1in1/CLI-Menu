@@ -50,6 +50,6 @@ The value associated with any key in `d` must be of the form `[ desc, aliases ]`
 ...`aliases` is an Array of Strings giving alternative triggers/names. **If you want to add aliases to a function, add them here: the menu will pick up these too.**
 
 ### banner, indent, options_on_unrecognised
-banner is a String which is printed by Menu.print_banner. indent is a String which is printed to the console when prompting for user input (ie on the same line the user types). options_on_unrecognised is a boolean: if set to true, then every time the user gives an unknown option, Menu.print_options is called.
+`banner` is a String which is printed by `Menu.print_banner`. `indent` is a String which is printed to the console when prompting for user input (ie on the same line the user types). `options_on_unrecognised` is a boolean: if set to true, then every time the user gives an unknown option, `Menu.print_options` is called.
 
 
