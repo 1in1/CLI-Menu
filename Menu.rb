@@ -50,11 +50,14 @@ class Menu
     if !(options_on_unrecognised == false || options_on_unrecognised == true)
       raise TypeError.new('Argument "options_on_unrecognised" must be a TrueClass or FalseClass.') end
 
-    @funct, @desc, @indent, @opts_on_fail = functions, descriptions, indent, options_on_unrecognised
+    @funct, @desc, @banner, @indent, @opts_on_fail = functions, descriptions, banner, indent, options_on_unrecognised
   end
 
 
-  attr_accessor :indent #Maybe add type controls on indent...
+  attr_reader :indent
+  def indent= (a)
+    indent = a.to_s
+  end
 
   def print_banner
     print @banner
