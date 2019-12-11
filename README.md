@@ -9,21 +9,20 @@ It will throw a LOT of errors if the input is formatted wrongly - with any luck 
 ***
 
 To present a menu, you only need to initialize it, and then call idle.
-
 ```ruby
 m = Menu.new({}, {}, "This is a new menu!")
 m.idle
 ```
 
 To make it do anything interesting, you'll need to populate those first two hashes. This requires a bit of explanation - or see the examples. The constructor begins:
-'''ruby
+```ruby
   def initialize(functions,
       descriptions,
       banner,
       indent = '> ',
       options_on_unrecognised = false
         )
-'''
+```
 I'll break these down below
 
 ###functions
