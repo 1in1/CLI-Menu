@@ -9,6 +9,7 @@ It will throw a LOT of errors if the input is formatted wrongly - with any luck 
 ***
 
 To present a menu, you only need to initialize it, and then call idle.
+
 ```ruby
 m = Menu.new({}, {}, "This is a new menu!")
 m.idle
