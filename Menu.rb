@@ -136,7 +136,7 @@ private
       #2: in outer single quotes
       #We dropper inners if the outers are closed
       for j in 0..input.length - 1 do
-        if input[j] == "\""
+        if input[j] == "\"" && (j == 0 || input[j-1] != "\\")
           case state
           when 0
             state = 1
@@ -145,7 +145,7 @@ private
           when 2
 
           end
-        elsif input[j] == "'"
+        elsif input[j] == "'" && (j == 0 || input[j-1] != "\\")
           case state
           when 0
             state = 2
